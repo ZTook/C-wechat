@@ -18,15 +18,22 @@ router.use('/', wechat(config.token).text(function(message, req, res, next) {
   // MsgType: 'text',
   // Content: 'http',
   // MsgId: '5837397576500011341' }
-  var keyArray = ['你好', '约吗'];
+  var keyArray = ['你好', '什么', '唱歌', '才艺'];
   var content = message.Content;
+
+  if (content === 'list') {
+    res.wait('view');
+  } else {
+    res.reply('hehe');
+  }
+
   var keyIndex = keyArray.indexOf(content);
   switch (keyIndex) {
     case 0:
       {
         res.reply({
           type: "text",
-          content: '您好，大家好才是真的好！'
+          content: '嘿，你想 Git Clone 什么技能！'
         });
 
       }
@@ -35,15 +42,35 @@ router.use('/', wechat(config.token).text(function(message, req, res, next) {
       {
         res.reply({
           type: "text",
-          content: '不约，不约，叔叔我们不约！'
+          content: 'Git 什么，就是什么！'
         });
 
       }
       break;
+    case 2:
+      {
+        res.reply({
+          title: "来段音乐吧<",
+          description: "一无所有",
+          musicUrl: "/fixture/song.mp3",
+          hqMusicUrl: "/fixture/song.mp3"
+        });
+      }
+    case 2:
+      {
+        res.reply([
+          {
+            title: '你来我家接我吧',
+            description: '这是女神与高富帅之间的对话',
+            picurl: 'http://img1.tuicool.com/rY3AfaQ.jpg',
+            url: 'http://www.tuicool.com/articles/Qzui2a'
+          }
+        ]);
+      }
     default:
       res.reply({
         type: "text",
-        content: '服务器挂掉了，你的要求暂时无法满足……'
+        content: '世界观努力构建中……'
       });
       break;
   }
