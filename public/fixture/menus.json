@@ -1,0 +1,22 @@
+{
+  "button":[
+    {
+      "name":"喜欢右鍵",
+      "sub_button":
+        {
+          "type":"view",
+          "name":"搜索",
+          "url":"http://www.bing.com/"
+        }
+    },
+    {
+      "name":"嫌弃右鍵",
+      "sub_button":
+        {
+          "type":"click",
+          "name":"嘿嘿一贊",
+          "key":"V1001_GOOD"
+        }
+    }
+  ]
+}

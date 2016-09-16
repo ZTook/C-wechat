@@ -3,14 +3,25 @@ var router = require('express').Router();
 var wechat = require('wechat');
 var config = {
   token: 'ztooken',
-  appid: 'wxa3c315aaf5d256e1',
+  appid: 'wx746e3618f045af91',
   encodingAESKey: 'wIHsLD9LdOVFNEkThxKxeufsvbKHicXDGsCgkF9dedn'
 };
 
 var WechatAPI = require('wechat-api');
-var api = new WechatAPI('wxa3c315aaf5d256e1',
-  '816737ad143d2ea1e9b4ad1e27cba391');
+var api = new WechatAPI('wx746e3618f045af91',
+  'e023515de7a73f9c2e93db5937ca700f');
+/*
+api.getAccessToken(function(error, token){
+  console.log(error);
+  console.log(token);
+});
 
+var menu = JSON.stringify(require('../public/fixture/menus.json'));
+
+api.createMenu(menu, function (err, result) {
+  console.log(result);
+});
+*/
 router.use('/', wechat(config.token).text(function(message, req, res, next) {
   // message为文本内容
   // FromUserName: 'oPKu7jgOibOA-De4u8J2RuNKpZRw',
@@ -18,14 +29,8 @@ router.use('/', wechat(config.token).text(function(message, req, res, next) {
   // MsgType: 'text',
   // Content: 'http',
   // MsgId: '5837397576500011341' }
-  var keyArray = ['你好', '什么', '唱歌', '才艺'];
+  var keyArray = ['你好','什么','唱歌','才艺'];
   var content = message.Content;
-
-  if (content === 'list') {
-    res.wait('view');
-  } else {
-    res.reply('hehe');
-  }
 
   var keyIndex = keyArray.indexOf(content);
   switch (keyIndex) {
@@ -50,23 +55,29 @@ router.use('/', wechat(config.token).text(function(message, req, res, next) {
     case 2:
       {
         res.reply({
-          title: "来段音乐吧<",
-          description: "一无所有",
-          musicUrl: "/fixture/song.mp3",
-          hqMusicUrl: "/fixture/song.mp3"
+          type: "music",
+          content: {
+            title: "来段音乐吧",
+            description: "叮咚叮咚",
+            musicUrl: "../public/fixture/song.mp3",
+            hqMusicUrl: "../public/fixture/song.mp3",
+            thumbMediaId: "thisThumbMediaId"
+          }
         });
       }
-    case 2:
+      break;
+    case 3:
       {
         res.reply([
           {
-            title: '你来我家接我吧',
-            description: '这是女神与高富帅之间的对话',
+            title: '程序员是怎么抢月鉼的',
+            description: '这是一项淘宝技能',
             picurl: 'http://img1.tuicool.com/rY3AfaQ.jpg',
             url: 'http://www.tuicool.com/articles/Qzui2a'
           }
         ]);
       }
+      break;
     default:
       res.reply({
         type: "text",
