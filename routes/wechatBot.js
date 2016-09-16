@@ -3,14 +3,14 @@ var router = require('express').Router();
 var wechat = require('wechat');
 var config = {
   token: 'ztooken',
-  appid: 'wx746e3618f045af91',
-  encodingAESKey: 'wIHsLD9LdOVFNEkThxKxeufsvbKHicXDGsCgkF9dedn'
+  appid: 'wx69a00b6977e0471a',
+  //encodingAESKey: 'wIHsLD9LdOVFNEkThxKxeufsvbKHicXDGsCgkF9dedn'
 };
 
 var WechatAPI = require('wechat-api');
-var api = new WechatAPI('wx746e3618f045af91',
-  'e023515de7a73f9c2e93db5937ca700f');
-/*
+var api = new WechatAPI('wx69a00b6977e0471a',
+  '354dfcc28799e033d5d9c78449a17765');
+
 api.getAccessToken(function(error, token){
   console.log(error);
   console.log(token);
@@ -21,7 +21,7 @@ var menu = JSON.stringify(require('../public/fixture/menus.json'));
 api.createMenu(menu, function (err, result) {
   console.log(result);
 });
-*/
+
 router.use('/', wechat(config.token).text(function(message, req, res, next) {
   // message为文本内容
   // FromUserName: 'oPKu7jgOibOA-De4u8J2RuNKpZRw',
